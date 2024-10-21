@@ -22,23 +22,23 @@ function Navbar() {
 function HeroSection() {
   return (
     <>
-      <section className="max-w-[1200px] mx-auto mt-20  ">
-        <div className="flex flex-row items-center gap-20">
+      <section className="lg:max-w-[1200px] max-w-auto mx-auto lg:mt-20 mt-10 ">
+        <div className="flex lg:flex-row flex-col justify-center items-center lg:gap-20 gap-10">
           <div className="w-full flex flex-col ">
-            <div className="flex justify-end w-full ">
-              <h2 className="text-[52px] font-[700] flex flex-col items-end m-0 space-y-0 w-[360px] text-end">
+            <div className="flex lg:justify-end w-full justify-center">
+              <h2 className="text-5xl font-bold lg:text-[52px] lg:font-bold flex lg:flex-col  text-center lg:items-end lg:w-[360px] mb-8 lg:text-end ">
                 Stay Informed, Stay Inspired
               </h2>
             </div>
 
-            <div className=" flex justify-end">
-              <h4 className="text-end w-[300px]">
+            <div className=" flex lg:justify-end justify-center">
+              <h4 className="lg:text-end w-[300px]">
                 Discover a World of Knowledge at Your Fingertips. Your Daily
                 Dose of Inspiration and Information.
               </h4>
             </div>
           </div>
-          <div className="w-[1200px] h-[529px] ">
+          <div className="lg:w-[1200px] lg:h-[529px] h-96 w-72 bg">
             <img
               src={heroimage}
               alt=""
