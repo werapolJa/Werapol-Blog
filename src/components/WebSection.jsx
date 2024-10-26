@@ -1,8 +1,9 @@
-import { Linkedin, Search } from "lucide-react";
+import { Axe, Linkedin, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { blogPosts } from "../data/blogPosts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export function Navbar() {
   return (
@@ -160,27 +161,16 @@ export function ArticleSection() {
                 : `px-3 ` +
                   `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl `
             }
-            onClick={() => setNavBarHead("Inspitration")}
+            onClick={() => setNavBarHead("Inspiration")}
           >
             Inspiration
           </button>
-          <button
-            className={
-              navBarHead === "Mercedes"
-                ? `bg-[#DAD6D1] rounded-xl p-3 cursor-pointer`
-                : `px-3 ` +
-                  `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl `
-            }
-            onClick={() => setNavBarHead("Mercedes")}
-          >
-            Mercedes
-          </button>
+
           <button
             className={
               navBarHead === "General"
                 ? `bg-[#DAD6D1] rounded-xl p-3 `
-                : `px-3 ` +
-                  `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl `
+                : `px-3 ` + `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl`
             }
             onClick={() => setNavBarHead("General")}
           >
@@ -191,7 +181,7 @@ export function ArticleSection() {
           <div className="flex  relative  items-center rounded-lg py-5 lg:mr-5">
             <Input
               placeholder="Search"
-              className="py-2 px-4 rounded-lg w-96 text-md "
+              className="py-2 px-4 rounded-lg w-96 text-md focus-visible:outline focus-visible:ring-0  !border-0  focus-visible:ring-offset-0 "
             />
 
             <Search className=" text-sm px-1 right-1 absolute " />
@@ -208,11 +198,12 @@ export function ArticleSection() {
             <option value="Highlight">Highlight</option>
             <option value="Cat">Cat</option>
             <option value="Inspitration">Inspitration</option>
-            <option value="Mercedes">Mercedes</option>
+
             <option value="General">Ganeral</option>
           </select>
         </div>
       </div>
+
       <div className="max-w-7xl mx-auto my-10">
         <div className="lg:grid lg:grid-cols-2 gap-8">
           {navBarHead === "Highlight"
@@ -221,6 +212,7 @@ export function ArticleSection() {
                 .filter((animalfilter) => animalfilter.category == navBarHead)
                 .map((animal) => <BlogCard animal={animal} />)}
         </div>
+        <h2 className="max-w-7xl mx-auto text-center mx-10">view more</h2>
       </div>
     </>
   );
