@@ -1,8 +1,9 @@
-import { Linkedin, Search } from "lucide-react";
+import { Axe, Linkedin, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { blogPosts } from "../data/blogPosts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export function Navbar() {
   return (
@@ -64,7 +65,7 @@ export function HeroSection(props) {
           </div>
           <div className="">
             <h5>-Author</h5>
-            <h3 className="text-[24px] font-[600] my-3">Thompson P.</h3>
+            <h3 className="text-[24px] font-[600] my-3">{}</h3>
             <h4 className="mb-8 text-[18px] w-[347px]">
               I am a pet enthusiast and freelance writer who specializes in
               animal behavior and care. With a deep love for cats, I enjoy
@@ -122,11 +123,6 @@ export function Footer() {
 export function ArticleSection() {
   let [navBarHead, setNavBarHead] = useState("Highlight");
 
-  console.log(navBarHead);
-
-  let we = blogPosts.filter((an) => an.date < 5);
-  console.log(we);
-
   return (
     <>
       <div className="flex justify-center lg:max-w-7xl lg:mx-auto  lg:justify-start">
@@ -141,7 +137,7 @@ export function ArticleSection() {
               navBarHead === "Highlight"
                 ? `bg-[#DAD6D1] rounded-xl p-3 cursor-pointer`
                 : `px-3 ` +
-                  `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl `
+                  `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl p-3 `
             }
             onClick={() => setNavBarHead("Highlight")}
           >
@@ -165,27 +161,16 @@ export function ArticleSection() {
                 : `px-3 ` +
                   `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl `
             }
-            onClick={() => setNavBarHead("Inspitration")}
+            onClick={() => setNavBarHead("Inspiration")}
           >
             Inspiration
           </button>
-          <button
-            className={
-              navBarHead === "Mercedes"
-                ? `bg-[#DAD6D1] rounded-xl p-3 cursor-pointer`
-                : `px-3 ` +
-                  `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl `
-            }
-            onClick={() => setNavBarHead("Mercedes")}
-          >
-            Mercedes
-          </button>
+
           <button
             className={
               navBarHead === "General"
                 ? `bg-[#DAD6D1] rounded-xl p-3 `
-                : `px-3 ` +
-                  `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl `
+                : `px-3 ` + `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl`
             }
             onClick={() => setNavBarHead("General")}
           >
@@ -196,7 +181,7 @@ export function ArticleSection() {
           <div className="flex  relative  items-center rounded-lg py-5 lg:mr-5">
             <Input
               placeholder="Search"
-              className="py-2 px-4 rounded-lg w-96 text-md "
+              className="py-2 px-4 rounded-lg w-96 text-md focus-visible:outline focus-visible:ring-0  !border-0  focus-visible:ring-offset-0 "
             />
 
             <Search className=" text-sm px-1 right-1 absolute " />
@@ -213,57 +198,65 @@ export function ArticleSection() {
             <option value="Highlight">Highlight</option>
             <option value="Cat">Cat</option>
             <option value="Inspitration">Inspitration</option>
-            <option value="Mercedes">Mercedes</option>
+
             <option value="General">Ganeral</option>
           </select>
         </div>
       </div>
-      <BlogCard />
+
+      <div className="max-w-7xl mx-auto my-10">
+        <div className="lg:grid lg:grid-cols-2 gap-8">
+          {navBarHead === "Highlight"
+            ? blogPosts.map((animal) => <BlogCard animal={animal} />)
+            : blogPosts
+                .filter((animalfilter) => animalfilter.category == navBarHead)
+                .map((animal) => <BlogCard animal={animal} />)}
+        </div>
+        <h2 className="max-w-7xl mx-auto text-center mx-10">view more</h2>
+      </div>
     </>
   );
 }
 
-export function BlogCard() {
+export function BlogCard({ animal }) {
+  console.log(animal);
+
   return (
-    <div className="max-w-7xl mx-auto my-10">
-      <div className="lg:grid lg:grid-cols-2 gap-8">
-        {blogPosts.map((animal, index) => (
-          <div className="flex flex-col gap-4" key={index}>
-            <a href="#" className="relative h-[212px] sm:h-[360px]">
-              <img
-                className="w-full h-full object-cover rounded-md"
-                src={animal.image}
-                alt="Understanding Cat Behavior: Why Your Feline Friend Acts the Way They Do"
-              />
-            </a>
-            <div className="flex flex-col">
-              <div className="flex">
-                <span className="bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-green-600 mb-2">
-                  {animal.category}
-                </span>
-              </div>
-              <a href="#">
-                <h2 className="text-start font-bold text-xl mb-2 line-clamp-2 hover:underline">
-                  {animal.title}
-                </h2>
-              </a>
-              <p className="text-muted-foreground text-sm mb-4 flex-grow line-clamp-3">
-                {animal.description}
-              </p>
-              <div className="flex items-center text-sm">
-                <img
-                  className="w-8 h-8 rounded-full mr-2"
-                  src="https://res.cloudinary.com/dcbpjtd1r/image/upload/v1728449784/my-blog-post/xgfy0xnvyemkklcqodkg.jpg"
-                  alt="Tomson P."
-                />
-                <span>{animal.author}</span>
-                <span className="mx-2 text-gray-300">|</span>
-                <span>{animal.date}</span>
-              </div>
-            </div>
+    <>
+      <div className="flex flex-col gap-4" key={animal.id}>
+        <a href="#" className="relative h-[212px] sm:h-[360px]">
+          <img
+            className="w-full h-full object-cover rounded-md"
+            src={animal.image}
+            alt="Understanding Cat Behavior: Why Your Feline Friend Acts the Way They Do"
+          />
+        </a>
+        <div className="flex flex-col">
+          <div className="flex">
+            <span className="bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-green-600 mb-2">
+              {animal.category}
+            </span>
           </div>
-        ))}
+          <a href="#">
+            <h2 className="text-start font-bold text-xl mb-2 line-clamp-2 hover:underline">
+              {animal.title}
+            </h2>
+          </a>
+          <p className="text-muted-foreground text-sm mb-4 flex-grow line-clamp-3">
+            {animal.description}
+          </p>
+          <div className="flex items-center text-sm">
+            <img
+              className="w-8 h-8 rounded-full mr-2"
+              src="https://res.cloudinary.com/dcbpjtd1r/image/upload/v1728449784/my-blog-post/xgfy0xnvyemkklcqodkg.jpg"
+              alt="Tomson P."
+            />
+            <span>{animal.author}</span>
+            <span className="mx-2 text-gray-300">|</span>
+            <span>{animal.date}</span>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
