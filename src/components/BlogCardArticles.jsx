@@ -1,10 +1,17 @@
+import { useNavigate } from "react-router-dom";
+
 export function BlogCard({ animal }) {
   //   console.log(animal);
+  const navigator = useNavigate();
 
   return (
     <>
       <div className="flex flex-col gap-4" key={animal.id}>
-        <a href="#" className="relative h-[212px] sm:h-[360px]">
+        <a
+          href="#"
+          className="relative h-[212px] sm:h-[360px]"
+          onClick={navigator("/landingpage")}
+        >
           <img
             className="w-full h-full object-cover rounded-md"
             src={animal.image}
