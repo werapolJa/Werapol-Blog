@@ -14,7 +14,10 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/landingpage" element={<LandingPage />} />
+          <Route
+            path="/landingpage/:landingId/:total"
+            element={<LandingPage />}
+          />
         </Routes>
         <Footer />
       </BrowserRouter>

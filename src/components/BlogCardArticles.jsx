@@ -1,31 +1,32 @@
 import { useNavigate } from "react-router-dom";
 
-export function BlogCard({ animal }) {
-  //   console.log(animal);
+export function BlogCard({ animal, totalPost }) {
+  // console.log(totalPost);
   const navigator = useNavigate();
 
   return (
     <>
       <div className="flex flex-col gap-4" key={animal.id}>
-        <a
-          href="#"
-          className="relative h-[212px] sm:h-[360px]"
-          onClick={navigator("/landingpage")}
-        >
+        <div className="relative h-[212px] sm:h-[360px]">
           <img
             className="w-full h-full object-cover rounded-md"
             src={animal.image}
             alt="Understanding Cat Behavior: Why Your Feline Friend Acts the Way They Do"
           />
-        </a>
+        </div>
         <div className="flex flex-col">
           <div className="flex">
             <span className="bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-green-600 mb-2">
               {animal.category}
             </span>
           </div>
-          <a href="#">
-            <h2 className="text-start font-bold text-xl mb-2 line-clamp-2 hover:underline">
+          <a href="">
+            <h2
+              className="text-start font-bold text-xl mb-2 line-clamp-2 hover:underline"
+              onClick={() =>
+                navigator(`/landingpage/${animal.id}/${totalPost}`)
+              }
+            >
               {animal.title}
             </h2>
           </a>
