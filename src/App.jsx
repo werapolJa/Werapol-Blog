@@ -1,11 +1,12 @@
 import "./App.css";
 import heroimage from "./assets/heroimg.jpg";
+
 function Navbar() {
   return (
     <>
-      <nav className="lg:max-w-7xl sm:mx-auto mx-10 h-[80px] flex items-center ">
+      <nav className="lg:container sm:mx-auto mx-10 h-[80px] flex items-center ">
         <div className="flex justify-between w-full items-center">
-          <div className=" text-3xl font-semibold">
+          <div className=" text-3xl font-semibold cursor-pointer">
             hh<span className="text-green-400">.</span>
           </div>
           <div className="inline md:hidden">
