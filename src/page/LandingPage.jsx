@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ReactMarkdown from "https://esm.sh/react-markdown@7";
+import ReactMarkdown from 'react-markdown';
 import PostComment from "@/components/PostComment";
 function LandingPage() {
   const [totalPost, setTotalPost] = useState([]);
   const { landingId, total } = useParams();
 
-  console.log(totalPost);
+  // console.log(totalPost);
   const landingPageData = async () => {
 
     try {
@@ -43,10 +43,10 @@ function LandingPage() {
                 className="w-full h-96 object-cover rounded-2xl"
               />
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-10 ">
+              <div className="md:grid grid-cols-1 md:grid-cols-3 gap-8 my-10 ">
                 
                 <main className="md:col-span-2">
-                  <article className="bg-white shadow-sm rounded-lg overflow-hidden">
+                  <article className="bg-white shadow-sm rounded-lg ">
                     <div className="py-5 flex gap-3">
                       <h3>{post.category}</h3>
 
@@ -56,7 +56,7 @@ function LandingPage() {
                       <h1 className="text-3xl font-bold text-gray-900 mb-4">
                         {post.title}
                       </h1>
-                      <div className="markdown flex gap-2 flex-col">
+                      <div className="markdown flex gap-2 flex-col my-10">
                         <ReactMarkdown className="markdown">
                           {post.content}
                         </ReactMarkdown>
