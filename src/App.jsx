@@ -14,6 +14,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          
           <Route
             path="/landingpage/:landingId/:total"
             element={<LandingPage />}
