@@ -111,7 +111,7 @@ export function Footer() {
               />
             </div>
           </div>
-          <h1 className="max-w-3xl mx-auto text-center w-full lg:text-end font-semibold text-2xl underline ">
+          <h1 className="max-w-3xl mx-auto text-center w-full lg:text-end font-semibold text-2xl underline cursor-pointer" onClick={()=>navigator("/")}>
             Home page
           </h1>
         </div>
