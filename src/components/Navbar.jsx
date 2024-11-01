@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 export function Navbar() {
+  const navigator = useNavigate()
   return (
     <>
       <nav className="lg:max-w-7xl sm:mx-auto mx-10 h-[80px] flex items-center ">
         <div className="flex justify-between w-full items-center">
-          <div className=" text-3xl font-semibold">
+          <div className=" text-3xl font-semibold cursor-pointer" onClick={()=>navigator("/")}>
             hh<span className="text-green-400">.</span>
           </div>
           <div className="inline md:hidden">
