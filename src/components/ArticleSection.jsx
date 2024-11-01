@@ -12,7 +12,8 @@ export function ArticleSection() {
   const [postData, setPostData] = useState([]);
   const [limitPost, setLimitPost] = useState(6);
   const [loadingPost, setLoadingPost] = useState(false);
-
+  const [totalPost, setTotalPost] = useState(0);
+  // console.log(totalPost);
   useEffect(() => {
     resDataPost();
   }, [limitPost]);
@@ -24,6 +25,8 @@ export function ArticleSection() {
         `https://blog-post-project-api.vercel.app/posts?limit=${limitPost}`
       );
       setPostData(res.data.posts);
+      setTotalPost(res.data.totalPosts);
+
       setLoadingPost(false);
     } catch (error) {
       setLoadingPost(true);
@@ -118,10 +121,14 @@ export function ArticleSection() {
       <div className="max-w-7xl mx-auto my-10">
         <div className="lg:grid lg:grid-cols-2 gap-8">
           {navBarHead === "Highlight"
-            ? postData.map((animal) => <BlogCard animal={animal} />)
+            ? postData.map((animal) => (
+                <BlogCard animal={animal} totalPost={totalPost} />
+              ))
             : postData
                 .filter((animalfilter) => animalfilter.category == navBarHead)
-                .map((animal) => <BlogCard animal={animal} />)}
+                .map((animal) => (
+                  <BlogCard animal={animal} totalPost={totalPost} />
+                ))}
         </div>
 
         <h3
