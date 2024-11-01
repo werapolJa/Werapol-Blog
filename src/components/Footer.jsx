@@ -1,6 +1,8 @@
 import { Linkedin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export function Footer() {
+  const navigator  = useNavigate()
   return (
     <>
       <footer className="lg:mt-20 mt-10  h-48 bg-[#EFEEEB] ">
@@ -29,7 +31,7 @@ export function Footer() {
               />
             </div>
           </div>
-          <h1 className="max-w-3xl mx-auto text-center w-full lg:text-end font-semibold text-2xl underline ">
+          <h1 className="max-w-3xl mx-auto text-center w-full lg:text-end font-semibold text-2xl underline cursor-pointer" onClick={()=>navigator("/")}>
             Home page
           </h1>
         </div>
