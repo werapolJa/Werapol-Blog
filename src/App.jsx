@@ -9,6 +9,7 @@ import Home from "./page/Home";
 import LandingPage from "./page/LandingPage";
 import Login from "./page/Login";
 import SignUp from "./page/SignUp";
+import NotFound from "./page/NotFound";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<NotFound />} />
           <Route
             path="/landingpage/:landingId/:total"
             element={<LandingPage />}
