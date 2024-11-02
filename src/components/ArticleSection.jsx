@@ -2,27 +2,40 @@ import { Axe, Linkedin, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
-
 import axios from "axios";
-
 import { BlogCard } from "./BlogCardArticles";
 import Loading from "./Loading";
+
+
+// import {
+//   Command,
+//   CommandDialog,
+//   CommandEmpty,
+//   CommandGroup,
+//   CommandInput,
+//   CommandItem,
+//   CommandList,
+//   CommandSeparator,
+//   CommandShortcut,
+// } from "@/components/ui/command"
 export function ArticleSection() {
   const [navBarHead, setNavBarHead] = useState("Highlight");
   const [postData, setPostData] = useState([]);
   const [limitPost, setLimitPost] = useState(6);
   const [loadingPost, setLoadingPost] = useState(false);
   const [totalPost, setTotalPost] = useState(0);
-  // console.log(totalPost);
+  const [searchKey, setSearchKey] = useState("");
+  // console.log(postData);
   useEffect(() => {
     resDataPost();
-  }, [limitPost]);
+    
+  }, [limitPost,searchKey]);
 
-  const resDataPost = async () => {
+  async function resDataPost  ()  {
     try {
       setLoadingPost(true);
       const res = await axios.get(
-        `https://blog-post-project-api.vercel.app/posts?limit=${limitPost}`
+        `https://blog-post-project-api.vercel.app/posts?limit=${limitPost}&keyword=${searchKey}`
       );
       setPostData(res.data.posts);
       setTotalPost(res.data.totalPosts);
@@ -37,6 +50,12 @@ export function ArticleSection() {
   const handleViewMore = () => {
     setLimitPost((limit) => limit + 2);
   };
+  function SearchArticles(event){
+    console.log(event.target.value);
+    
+    setSearchKey(event.target.value)
+
+  }
 
   return (
     <>
@@ -52,7 +71,7 @@ export function ArticleSection() {
               navBarHead === "Highlight"
                 ? `bg-[#DAD6D1] rounded-xl p-3 cursor-pointer`
                 : `px-3 ` +
-                  `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl p-3 `
+                `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl p-3 `
             }
             onClick={() => setNavBarHead("Highlight")}
           >
@@ -63,7 +82,7 @@ export function ArticleSection() {
               navBarHead === "Cat"
                 ? `bg-[#DAD6D1] rounded-xl p-3 cursor-pointer`
                 : `px-3 ` +
-                  `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl `
+                `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl `
             }
             onClick={() => setNavBarHead("Cat")}
           >
@@ -74,13 +93,12 @@ export function ArticleSection() {
               navBarHead === "Inspitration"
                 ? `bg-[#DAD6D1] rounded-xl p-3 cursor-pointer`
                 : `px-3 ` +
-                  `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl `
+                `hover:cursor-pointer hover:bg-[#e7e5e3] rounded-xl `
             }
             onClick={() => setNavBarHead("Inspiration")}
           >
             Inspiration
           </button>
-
           <button
             className={
               navBarHead === "General"
@@ -97,10 +115,24 @@ export function ArticleSection() {
             <Input
               placeholder="Search"
               className="py-2 px-4 rounded-lg w-96 text-md focus-visible:outline focus-visible:ring-0  !border-0  focus-visible:ring-offset-0 "
+              onChange={(event)=>SearchArticles(event)}
             />
 
             <Search className=" text-sm px-1 right-1 absolute " />
           </div>
+
+
+          {/* <Command className="absolute z-10 h-auto" onChange={(event)=>SearchArticles(event)}>
+            <CommandInput placeholder="Type a command or search..."      />
+            <CommandList>
+             
+             {searchKey && postData.map((post)=>(<CommandItem className="w-96">{post.description}</CommandItem>)) }
+         
+              <CommandSeparator />
+            </CommandList>
+          </Command> */}
+
+
         </div>
         <div className="flex flex-col gap-3 lg:hidden">
           <label>Category</label>
@@ -122,13 +154,13 @@ export function ArticleSection() {
         <div className="lg:grid lg:grid-cols-2 gap-8">
           {navBarHead === "Highlight"
             ? postData.map((animal) => (
-                <BlogCard animal={animal} totalPost={totalPost} />
-              ))
+              <BlogCard animal={animal} totalPost={totalPost} />
+            ))
             : postData
-                .filter((animalfilter) => animalfilter.category == navBarHead)
-                .map((animal) => (
-                  <BlogCard animal={animal} totalPost={totalPost} />
-                ))}
+              .filter((animalfilter) => animalfilter.category == navBarHead)
+              .map((animal) => (
+                <BlogCard animal={animal} totalPost={totalPost} />
+              ))}
         </div>
 
         <h3
