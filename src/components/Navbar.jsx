@@ -23,7 +23,7 @@ export function Navbar() {
             <button className="border-black border-2 w-[127px] h-[48px] rounded-full hover:cursor-pointer" onClick={()=>navigator("/login")}>
               Log in
             </button>
-            <button className="w-[127px] h-[48px] rounded-full bg-black text-white hover:cursor-pointer"onClick={()=>navigator("/signin")}>
+            <button className="w-[127px] h-[48px] rounded-full bg-black text-white hover:cursor-pointer"onClick={()=>navigator("/signup")}>
               Sign up
             </button>
           </div>
