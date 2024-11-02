@@ -20,10 +20,10 @@ export function Navbar() {
             </div>
           </div>
           <div className="hidden md:flex gap-3 ">
-            <button className="border-black border-2 w-[127px] h-[48px] rounded-full hover:cursor-pointer">
+            <button className="border-black border-2 w-[127px] h-[48px] rounded-full hover:cursor-pointer" onClick={()=>navigator("/login")}>
               Log in
             </button>
-            <button className="w-[127px] h-[48px] rounded-full bg-black text-white hover:cursor-pointer">
+            <button className="w-[127px] h-[48px] rounded-full bg-black text-white hover:cursor-pointer"onClick={()=>navigator("/signin")}>
               Sign up
             </button>
           </div>
