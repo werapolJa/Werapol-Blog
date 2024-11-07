@@ -9,20 +9,20 @@ function PostComment() {
 
 
   const copyToClipboard = () => {
-   
+
     const url = window.location.href; // URL of the current page
     console.log(url);
-    
+
     navigator.clipboard.writeText(url)
       .then(() => toast("Copied!", {
         description: "This article has been copied to your clipbord",
         action: {
           label: "Undo",
-      
-        },  style: {
-          background:'rgb(55,203,105)',
-          color:'white',
-        
+
+        }, style: {
+          background: 'rgb(55,203,105)',
+          color: 'white',
+
         },
       }))
       .catch(() => toast('Failed to copy URL'));
@@ -33,34 +33,26 @@ function PostComment() {
 
       <div className="w-full col-span-2 bp-4  rounded-lg shadow-sm  ">
         <div className="flex items-center justify-between mb-4 bg-[#EFEEEB] h-20 p-10 rounded-xl">
-
-
           <button className="inline-flex items-center px-3 py-1.5 bg-gray-50 hover:bg-gray-100 rounded-full text-sm  ">
             <Smile className="w-4 h-4 mr-2 text-yellow-500 " />
             <span className="font-medium">321</span>
           </button>
-
-
-
           <div className="flex items-center gap-2">
-            <button className="inline-flex items-center px-3 py-1.5 bg-gray-50 hover:bg-gray-100 rounded-full text-sm transition-colors" 
-            onClick={copyToClipboard}>
+            <button className="inline-flex items-center px-3 py-1.5 bg-gray-50 hover:bg-gray-100 rounded-full text-sm transition-colors"
+              onClick={copyToClipboard}>
 
               <Copy className="w-4 h-4 mr-2" />
               Copy link
             </button>
-
             <div className="flex gap-1">
               <button className="p-2 bg-[#1877F2] hover:bg-[#1877F2]/90 text-white rounded-full transition-colors">
                 <Facebook className="w-4 h-4" />
                 <span className="sr-only">Share on Facebook</span>
               </button>
-
               <button className="p-2 bg-[#0A66C2] hover:bg-[#0A66C2]/90 text-white rounded-full transition-colors">
                 <Linkedin className="w-4 h-4" />
                 <span className="sr-only">Share on LinkedIn</span>
               </button>
-
               <button className="p-2 bg-[#1DA1F2] hover:bg-[#1DA1F2]/90 text-white rounded-full transition-colors">
                 <Twitter className="w-4 h-4" />
                 <span className="sr-only">Share on Twitter</span>
